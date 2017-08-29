@@ -98,3 +98,8 @@ def find_intersections(rect1, rect2)
 end
 
 find_intersections(my_rectangle1, my_rectangle2)
+
+
+def is_super_balanced?
+
+end
