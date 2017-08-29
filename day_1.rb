@@ -51,7 +51,7 @@ def get_products_of_all_ints_except_at_index(arr1)
 end
 get_products_of_all_ints_except_at_index(arr1)
 
-arr2 = [-10, -10, 1, 2]
+arr2 = [-10, -10, 1, 200, 300]
 
 def array_of_int(arr2)
   arr2.sort!
@@ -70,3 +70,54 @@ def array_of_int(arr2)
 end
 
 array_of_int(arr2)
+
+arr3 = [-10, -10, 1, 200, 300]
+def array_of_int2(arr2)
+  lowest_2 = []
+  highest_3 = []
+  max_product = 1
+  arr2.each do |el|
+    if highest_3.length < 3
+      highest_3.push(el)
+
+    elsif el > highest_3.min
+      highest_3.delete(highest_3.min)
+      highest_3.push(el)
+    end
+    if lowest_2.length < 2
+      lowest_2.push(el)
+    elsif el < lowest_2.max
+      lowest_2.delete(lowest_2.max)
+      lowest_2.push(el)
+    end
+  end
+  highest_3_without_max = highest_3.reject { |el| el == highest_3.max }
+  if lowest_2[0] * lowest_2[1] > highest_3_without_max[0] * highest_3_without_max[1]
+    max_product = lowest_2[0] * lowest_2[1] * highest_3.max
+  else
+    max_product = highest_3.reduce(:*)
+  end
+  p max_product
+end
+
+array_of_int2(arr3)
+
+arr_merge = [[0, 1], [3, 5], [4, 8], [10, 12], [9, 10]]
+
+def merge_ranges(arr)
+  arr.sort_by! { |pair| pair[0] }
+  checking_pair = arr[0]
+  result_arr = []
+  arr[1..-1].each do |pair|
+    if checking_pair[1] >= pair[0]
+      checking_pair = [checking_pair[0], [pair[1], checking_pair[1]].max]
+    else
+      result_arr.push(checking_pair)
+      checking_pair = pair
+    end
+  end
+  result_arr.push(checking_pair)
+  p result_arr
+end
+
+merge_ranges(arr_merge)
