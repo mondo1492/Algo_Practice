@@ -20,6 +20,7 @@ def match_parens(str, n)
 end
 
 def match_parens2(str, n)
+  raise Exception, "n should be the index of a parenthesis" if str[n] != '('
   current_pos = n
   count = 0
   while current_pos <= str.length
@@ -28,8 +29,9 @@ def match_parens2(str, n)
     count -= 1 if str[current_pos] == ')'
     current_pos += 1
   end
+  raise Exception, "No closing parenthesis"
 end
 
-sen = "Sometimes (when I nest them (my parentheticals) too much (like this (and this))) they get confusing."
+sen = "Sometimes (when I nest them (my parentheticals) too much (like this (and this))) they get confusing()."
 p match_parens(sen, 10)
-p match_parens2(sen, 10)
+p match_parens2(sen, sen.length - 3)
