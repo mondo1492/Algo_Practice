@@ -6,8 +6,6 @@ class LinkedListNode
     @value = value
     @next  = nil
   end
-
-
 end
 
 def delete_node(node)
