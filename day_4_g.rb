@@ -56,13 +56,20 @@ def roman(roman_int)
   build_char = ''
   running_val = 0
   add_val = 0
+  new_loop = true
   roman_int.chars.each do |char|
-    build_char += char
+    if new_loop || char == roman_int.chars.last
+      build_char += char
+    end
+
     if numerals[build_char] != nil
       add_val = numerals[build_char]
+      new_loop = true
     else
       build_char = char
       running_val += add_val
+      # add_val = 0
+      new_loop = false
     end
   end
   running_val + add_val
@@ -80,33 +87,39 @@ def roman2(roman_int)
     }
     running_val = 0
     arr = []
-  roman_int.chars.each_with_index do |let, idx|
-    prev = arr.last || 0
-    arr.push(numerals[let])
-    if prev != 0 && arr.last > prev
-      p "loop1"
-      p idx
-      running_val += (arr.last - prev)
-      p running_val
-    elsif prev != 0
-      p "loop2"
-      p idx
-      running_val += arr.last
-      p running_val
+    skip = false
+    new_arr = roman_int.chars
+    new_arr[0...-1].each_index do |idx|
+      if skip
+        skip = false
+        next
+      end
+
+      if numerals[roman_int[idx]] < numerals[roman_int[idx + 1]]
+
+        running_val += (numerals[roman_int[idx + 1]] - numerals[roman_int[idx]])
+
+      else
+        running_val += (numerals[roman_int[idx + 1]] + numerals[roman_int[idx]])
+      end
+      skip = true
     end
-  end
-  running_val
+    if new_arr.length.odd?
+      running_val += numerals[roman_int[-1]]
+    end
+    running_val
 end
 
-# p roman('VI')
-# p roman2('VI')
-# p roman('XVI')
-# p roman2('XVI')
-# p roman('DCCVII')
-# p roman2('DCCVII')
-# p roman('DCCXVI')
-# p roman2('DCCXVI')
-p roman('CDXCIV')
+#500 400
+p roman('VI') # should be 6
+p roman2('VI')
+p roman('XVI') # should be 16
+p roman2('XVI')
+p roman('DCCVII') # should be 707
+p roman2('DCCVII')
+p roman('DCCXVI') # should be 716
+p roman2('DCCXVI')
+p roman('CDXCIV') # should be 494
 p roman2('CDXCIV')
-# p roman('LXX')
-# p roman2('LXX')
+p roman('LXX') # should be 70
+p roman2('LXX')
