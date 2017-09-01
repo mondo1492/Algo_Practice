@@ -17,6 +17,7 @@ def sort_scores(unsorted_scores, highest_possible_score)
 end
 
 arr = [42,12,41,100,1,99]
+arr2 = [1,2,3,6,4,5,6]
 
 p sort_scores(arr, 100)
 
@@ -25,12 +26,17 @@ require 'set'
 def find_double(arr)
   set = Set.new
   arr.each do |el|
-    if set.add?(el)
-    else
-      return el
-    end
+    return el unless set.add?(el)
   end
   "No duplicates"
 end
 
-p find_double([1,2,3,6,4,5,6])
+p find_double(arr2)
+
+def find_double2(arr)
+  real_val = (arr.last**2 + arr.last) / 2
+  actual_val = arr.reduce(:+)
+  real_val == actual_val ? "No duplicates" : actual_val - real_val
+end
+
+p find_double2(arr2)
