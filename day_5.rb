@@ -34,7 +34,7 @@ end
 p find_double(arr2)
 
 def find_double2(arr)
-  real_val = (arr.last**2 + arr.last) / 2
+  real_val = (arr.lastg**2 + arr.last) / 2
   actual_val = arr.reduce(:+)
   real_val == actual_val ? "No duplicates" : actual_val - real_val
 end
