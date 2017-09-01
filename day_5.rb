@@ -16,8 +16,8 @@ def sort_scores(unsorted_scores, highest_possible_score)
   sorted_arr
 end
 
-arr = [42,12,41,100,1,99]
-arr2 = [1,2,3,6,4,5,6]
+arr = [42, 12, 41, 100, 1, 99]
+arr2 = [1, 2, 3, 6, 4, 5, 6]
 
 p sort_scores(arr, 100)
 

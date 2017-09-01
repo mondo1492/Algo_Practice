@@ -1,27 +1,6 @@
-# 1 to 3999
-# M = 1000
-# D = 500
-# X = 10
-# L = 50
-#
-# 49
-# X
-#
-# idea
-# I
-# II
-# III
-# III
-# IV
-# V
-# VI
-# VII
-# VIII
-# IX
-# X
 def roman(roman_int)
-
-  numerals = {
+  numerals =
+    {
       'I' => 1,
       'II' => 2,
       'III' => 3,
@@ -61,14 +40,12 @@ def roman(roman_int)
     if new_loop || char == roman_int.chars.last
       build_char += char
     end
-
-    if numerals[build_char] != nil
+    if !numerals[build_char].nil?
       add_val = numerals[build_char]
       new_loop = true
     else
       build_char = char
       running_val += add_val
-      # add_val = 0
       new_loop = false
     end
   end
@@ -76,7 +53,8 @@ def roman(roman_int)
 end
 
 def roman2(roman_int)
-  numerals = {
+  numerals =
+    {
       'I' => 1,
       'V' => 5,
       'X' => 10,
@@ -85,32 +63,29 @@ def roman2(roman_int)
       'D' => 500,
       'M' => 1000,
     }
-    running_val = 0
-    arr = []
-    skip = false
-    new_arr = roman_int.chars
-    new_arr[0...-1].each_index do |idx|
-      if skip
-        skip = false
-        next
-      end
-
-      if numerals[roman_int[idx]] < numerals[roman_int[idx + 1]]
-
-        running_val += (numerals[roman_int[idx + 1]] - numerals[roman_int[idx]])
-
-      else
-        running_val += (numerals[roman_int[idx + 1]] + numerals[roman_int[idx]])
-      end
-      skip = true
+  running_val = 0
+  skip = false
+  new_arr = roman_int.chars
+  new_arr[0...-1].each_index do |idx|
+    if skip
+      skip = false
+      next
     end
-    if new_arr.length.odd?
-      running_val += numerals[roman_int[-1]]
+
+    if numerals[roman_int[idx]] < numerals[roman_int[idx + 1]]
+      running_val += (numerals[roman_int[idx + 1]] - numerals[roman_int[idx]])
+    else
+      running_val += (numerals[roman_int[idx + 1]] + numerals[roman_int[idx]])
     end
-    running_val
+    skip = true
+  end
+
+  if new_arr.length.odd?
+    running_val += numerals[roman_int[-1]]
+  end
+  running_val
 end
 
-#500 400
 p roman('VI') # should be 6
 p roman2('VI')
 p roman('XVI') # should be 16
