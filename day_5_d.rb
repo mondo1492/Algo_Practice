@@ -90,6 +90,8 @@ p egg_broke2?(98)
 p egg_broke2?(99)
 p egg_broke2?(100)
 
+#decrement one after every 10 like 10..9..8
+
 def egg_broke3?(secret_highest_floor)
   initial_pass = 10
   while !broken?(initial_pass, secret_highest_floor)
